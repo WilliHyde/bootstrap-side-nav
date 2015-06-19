@@ -1,0 +1,12 @@
+{
+  "name": "bootstrap-side-nav",
+  "version": "0.0.1",
+  "description": "New style of side navigation built off the default bootstrap nav bar.",
+  "author": "William Hyde",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.0.1"
+  }
+}

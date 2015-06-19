@@ -1,0 +1,193 @@
+/* - - - - - - - - - - - - - - - - - -
+
+   Built by William Hyde for Bootstrap Version 3.3.4
+   PUT GITHUB REPO HERE
+   
+   MIT license - http://opensource.org/licenses/mit-license.php
+   
+ - - - - - - - - - - - - - - - - - - */
+
+//Vars
+$fold-width: 768px;
+$side-width: 260px;
+$navbar-height: 51px;
+$collapse-speed: 150ms;
+$container-fluid-left: 0px;
+$default-bg-color: #f8f8f8;
+$default-border-color: #e7e7e7;
+$inverse-bg-color: #222222;
+$inverse-border-color: #101010;
+$toggle-default: #888888;
+$toggle-default-focus: #5e5e5e;
+$toggle-inverse: #9d9d9d;
+$toggle-inverse-focus: #ffffff;
+$body-cover-color: rgba(0,0,0,0.5);
+
+//Mixins
+@mixin translate-x($amount) {
+	-webkit-transform: translateX($amount);
+	-ms-transform: translateX($amount);
+	transform: translateX($amount);
+}
+
+//Main Styles
+.sidenav-toggle {
+	display: none;
+	float: left;
+	padding: 10px 15px;
+	margin: 8px 0;
+	background-color: transparent;
+	background-image: none;
+	border: none;
+	
+	> .icon-bar {
+		display: block;
+		width: 20px;
+		height: 2px;
+	
+		+ .icon-bar {
+			margin-top: 4px;
+		}
+	}
+}
+.navbar {
+	&-default {
+		.sidenav-toggle {
+			> .icon-bar {
+				background-color: $toggle-default;
+			}
+			&:hover > .icon-bar, 
+			&:focus > .icon-bar {
+				background-color: $toggle-default-focus;
+			}
+		}
+	}
+	&-inverse {
+		.sidenav-toggle {
+			> .icon-bar {
+				background-color: $toggle-inverse;
+			}
+			&:hover > .icon-bar, 
+			&:focus > .icon-bar {
+				background-color: $toggle-inverse-focus;
+			}
+		}	
+	}
+}
+.sidenav-content .navbar-brand {
+	display: none;
+}
+.sidenav-right .sidenav-toggle {
+	float: right;
+}
+
+@media (max-width: $fold-width) {
+	.sidenav {
+		> .container-fluid .sidenav-toggle {
+			margin-left: $container-fluid-left;
+		}
+		&-toggle {
+			display: block;
+		}
+		&-content {
+			position: fixed;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			width: $side-width;
+			overflow: auto;
+			background-color: $default-bg-color;
+			box-shadow: inset -1px 0 0 $default-border-color;
+			z-index: 990;
+			
+			&.opening, 
+			&.closing {
+				-webkit-transition: -webkit-transform $collapse-speed;
+				-ms-transition: -ms-transform $collapse-speed;
+				transition: transform $collapse-speed;
+			}
+			&.closed, 
+			&.closing {
+				@include translate-x(-$side-width);
+			}
+			.navbar-brand {
+				float: none;
+				display: block;
+				border-bottom: 1px solid transparent;
+			}
+		}
+		.navbar-nav, 
+		.navbar-nav > li {
+			float: none;
+			margin: 0;
+		}
+		.navbar-left, 
+		.navbar-right {
+			//Used !important because of it's use the the Bootstrap source.
+			float: none !important;	
+		}
+		.navbar-form {
+			margin: 9px 0;
+		}
+		
+		//Body Lock and Cover
+		&-body-locked {
+			overflow: hidden;
+		}
+		&-body-cover {
+			position: fixed;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			background-color: $body-cover-color;
+			z-index: 980;
+			-webkit-animation: sidenav_bg_fade 150ms;
+			animation: sidenav_bg_fade 150ms;
+		}
+		
+		//Fixed and Static
+		&.navbar-fixed-top .sidenav-content {
+			top: $navbar-height;
+		}
+		&.navbar-fixed-bottom .sidenav-content {
+			bottom: $navbar-height;
+		}
+		&.navbar-static-top {
+			z-index: auto;
+		}
+	}
+	
+	//Right Side
+	.sidenav-right {
+		.sidenav {
+			&-content {
+				left: auto;
+				right: 0;
+
+				&.closed, 
+				&.closing {
+					@include translate-x($side-width);
+				}
+			}
+		}
+	}
+	
+	//Inverse Color
+	.navbar-inverse .sidenav {
+		&-content {
+			background-color: $inverse-bg-color;
+			box-shadow: inset -1px 0 0 $inverse-border-color;
+		}
+	}
+}
+
+//Animations
+@keyframes sidenav_bg_fade {
+	0% { opacity: 0; }
+	100% { opacity: 1; }
+}
+@-webkit-keyframes sidenav_bg_fade {
+	0% { opacity: 0; }
+	100% { opacity: 1; }
+}
